@@ -24,7 +24,7 @@ class HistoriesController < ApplicationController
 
    def getPrices
       objs = History.where(:symbol => params[:symbol])
-      @prices = objs.map {|x| x.price}
+      @prices = objs.map {|x| x.price}.last(30)
       render json: @prices
    end
 
