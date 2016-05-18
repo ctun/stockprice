@@ -6,6 +6,7 @@ gem 'rails', '4.2.6'
 
 group :production do
   gem 'pg'
+  gem 'puma'
 end
 
 group :development do
