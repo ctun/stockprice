@@ -1,0 +1,47 @@
+<head>
+   <%= javascript_include_tag('plotly-latest.min.js') %>
+   <script>
+
+     function range(start,end,inc) {
+        var arr = [];
+        for (var i = start; i <= end; i += inc) {
+          arr.push(i);
+        }
+        return arr;
+     }
+
+     function dograph(symbol) {
+
+        var x = range(0,29,1)
+
+        $.ajax({
+             type: "GET",
+             url: "/histories/getPrices/" + symbol,
+             dataType: "json",
+             success: function(data){
+                 GRAPH = document.getElementById('graph');
+                 Plotly.plot( GRAPH, [{ x: x, y: data  }], 
+                                  { margin: { t: 0 } } );
+             }        
+        });
+
+     }
+
+
+   </script>
+</head>
+
+<body>
+   <center><h2> Stock prices for last 30 days</h2></center>
+   <form action="" onsubmit="return dograph()">
+   <select name="aa" onchange="dograph(this.value)">
+      <option value="">Chose a stock</option>
+      <option value="ORCL">Oracle</option>
+      <option value="AAPL">Apple</option>
+      <option value="MSFT">Microsoft</option>
+      <option value="BMW">BMW</option>
+   </select>`
+   </form>
+   <div id="graph" style="width:600px;height:250px;"></div>
+</body>
+

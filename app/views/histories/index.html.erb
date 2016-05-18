@@ -1,0 +1,15 @@
+<h1>Known Data</h1>
+ 
+<%= link_to 'New', new_history_path %>
+
+<table>
+  <tr>
+    <th>Symbol</th>
+  </tr>
+ 
+  <% @histories.each do |history| %>
+    <tr>
+      <td><%= history.symbol %></td>
+    </tr>
+  <% end %>
+</table>
