@@ -22,9 +22,11 @@ class HistoriesController < ApplicationController
       redirect_to @histories
    end
 
+   #
+   # assumes one price entry per day.
+
    def getPrices
-      objs = History.where(:symbol => params[:symbol])
-      @prices = objs.map {|x| x.price}.last(30)
+      @prices = History.where(:symbol => params[:symbol]).last(30).map {|x| x.price}
       render json: @prices
    end
 
